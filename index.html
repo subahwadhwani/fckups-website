@@ -9,12 +9,20 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="logo.png" />
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
   <!-- Open Graph -->
   <meta property="og:title" content="F#ckups · A podcast by Subah Wadhwani" />
   <meta property="og:description" content="Subah Wadhwani talks to his friends about making money, new ideas, investing, and other cool shit." />
-  <meta property="og:image" content="https://YOUR_DOMAIN_HERE/logo.png" />
+  <meta property="og:image" content="https://fuckupspod.com/hero.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://YOUR_DOMAIN_HERE/" />
+  <meta property="og:url" content="https://fuckupspod.com/" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
@@ -27,9 +35,10 @@
       --accent: #2563eb;
       --accent-soft: rgba(37, 99, 235, 0.15);
       --border-subtle: rgba(15, 23, 42, 0.08);
-      --pill-bg: rgba(15, 23, 42, 0.04);
+      --pill-bg: rgba(15, 23, 42, 0.08);
       --shadow-soft: 0 20px 45px rgba(15, 23, 42, 0.12);
       --radius-xl: 24px;
+      --serif: "Playfair Display", "Georgia", "Times New Roman", serif;
     }
 
     * {
@@ -66,7 +75,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 10;
     }
 
     .nav-left {
@@ -104,14 +115,18 @@
       display: flex;
       gap: 16px;
       align-items: center;
+      background: rgba(248, 250, 252, 0.8);
+      padding: 6px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.35);
     }
 
     .nav-links a {
       font-size: 13px;
       color: var(--text-soft);
-      padding: 6px 10px;
+      padding: 4px 9px;
       border-radius: 999px;
-      background: transparent;
       border: 1px solid transparent;
     }
 
@@ -121,52 +136,59 @@
     }
 
     .nav-cta {
-      padding: 7px 14px;
+      padding: 5px 12px;
       border-radius: 999px;
-      background: var(--text-main);
+      background: #020617;
       color: white !important;
-      font-size: 13px;
+      font-size: 12px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.4);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.5);
     }
 
     .nav-cta span {
-      font-size: 15px;
+      font-size: 14px;
       transform: translateY(1px);
     }
 
-    /* HERO */
+    /* FULL-BLEED HERO */
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 32px;
-      align-items: center;
-      margin: 16px 0 48px;
-      padding: 28px;
-      border-radius: var(--radius-xl);
+      position: relative;
+      width: 100vw;
+      margin: 16px calc(50% - 50vw) 56px;
+      min-height: 70vh;
+      overflow: hidden;
+      border-radius: 32px;
+      box-shadow: 0 28px 70px rgba(15, 23, 42, 0.65);
       background:
-        linear-gradient(130deg, rgba(255,255,255,0.85), rgba(255,255,255,0.98)),
+        linear-gradient(to right, rgba(3, 7, 18, 0.9) 0, rgba(3, 7, 18, 0.65) 32%, rgba(15, 23, 42, 0.35) 60%, rgba(15, 23, 42, 0.1) 100%),
         url("hero.png") center/cover no-repeat;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: var(--shadow-soft);
+      color: #e5ecff;
     }
 
-    .hero-left {
-      padding-right: 8px;
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 38px 20px 54px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
     }
 
     .hero-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 999px;
-      background: var(--pill-bg);
-      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.7);
+      color: #cbd5f5;
       font-size: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      backdrop-filter: blur(12px);
     }
 
     .hero-pill-dot {
@@ -174,46 +196,48 @@
       height: 7px;
       border-radius: 999px;
       background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
     }
 
     .hero-title {
-      font-size: clamp(36px, 5vw, 48px);
-      line-height: 1.04;
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 60px);
+      line-height: 1.02;
       margin: 0 0 10px;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      color: #f9fafb;
     }
 
     .hero-tagline {
       font-size: 15px;
-      color: var(--text-soft);
-      max-width: 440px;
-      margin-bottom: 18px;
+      color: #e5e7eb;
+      max-width: 520px;
+      margin-bottom: 20px;
     }
 
     .hero-cta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 18px;
+      padding: 11px 20px;
       border-radius: 999px;
       border: none;
       background: linear-gradient(135deg, #2563eb, #4f46e5);
       color: white;
       font-size: 14px;
       cursor: pointer;
-      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.6);
     }
 
     .btn-primary:hover {
-      filter: brightness(1.03);
+      filter: brightness(1.05);
       text-decoration: none;
     }
 
@@ -221,17 +245,18 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 9px 16px;
+      padding: 10px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(255, 255, 255, 0.7);
-      color: var(--text-main);
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      background: rgba(15, 23, 42, 0.4);
+      color: #e5ecff;
       font-size: 13px;
       cursor: pointer;
+      backdrop-filter: blur(14px);
     }
 
     .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(15, 23, 42, 0.75);
       text-decoration: none;
     }
 
@@ -240,7 +265,7 @@
       flex-wrap: wrap;
       gap: 14px;
       font-size: 12px;
-      color: var(--text-soft);
+      color: #cbd5f5;
     }
 
     .hero-meta span {
@@ -253,58 +278,7 @@
       width: 4px;
       height: 4px;
       border-radius: 999px;
-      background: rgba(148, 163, 184, 0.7);
-    }
-
-    /* Hero right image card */
-    .hero-right-card {
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      background: radial-gradient(circle at top, #93c5fd 0, #1d2534 50%, #020617 100%);
-      min-height: 260px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: stretch;
-      border: 1px solid rgba(15, 23, 42, 0.35);
-      box-shadow: 0 25px 50px rgba(15, 23, 42, 0.7);
-    }
-
-    .hero-right-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.96;
-      transform: scale(1.02);
-    }
-
-    .hero-right-glass {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 14px;
-      padding: 10px 14px;
-      border-radius: 16px;
-      background: rgba(15, 23, 42, 0.7);
-      color: white;
-      backdrop-filter: blur(14px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-    }
-
-    .hero-right-glass-title {
-      font-weight: 500;
-      margin-bottom: 2px;
-      font-size: 13px;
-    }
-
-    .pill-small {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.2);
-      font-size: 11px;
+      background: rgba(148, 163, 184, 0.9);
     }
 
     /* Sections */
@@ -452,7 +426,7 @@
     .footer-bg {
       position: absolute;
       inset: 0;
-      opacity: 0.7;
+      opacity: 0.75;
       background: url("footer.png") center/cover no-repeat;
       filter: saturate(1.1);
     }
@@ -492,14 +466,12 @@
     }
 
     /* Responsive */
-    @media (max-width: 840px) {
+    @media (max-width: 900px) {
       .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding: 22px 18px;
+        min-height: 68vh;
       }
-      .hero-right-card {
-        order: -1;
-        min-height: 230px;
+      .hero-inner {
+        padding: 30px 18px 46px;
       }
       .nav {
         flex-direction: column;
@@ -507,16 +479,20 @@
         gap: 12px;
       }
       .nav-links {
-        flex-wrap: wrap;
+        padding-inline: 8px;
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       main {
         padding-inline: 14px;
       }
       .hero {
-        margin-top: 10px;
+        margin-top: 12px;
+        border-radius: 0 0 32px 32px;
+      }
+      .hero-inner {
+        padding-inline: 16px;
       }
       footer {
         padding: 16px 14px 18px;
@@ -534,7 +510,6 @@
     <header class="nav">
       <div class="nav-left">
         <div class="logo">
-          <!-- 40x40 logo -->
           <img src="logo.png" alt="F#ckups logo" />
         </div>
         <div>
@@ -551,49 +526,38 @@
         </a>
       </nav>
     </header>
+  </main>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-left">
-        <div class="hero-pill">
-          <span class="hero-pill-dot"></span>
-          New episodes whenever something interesting happens.
-        </div>
-        <h1 class="hero-title">F#ckups</h1>
-        <p class="hero-tagline">
-          Subah Wadhwani talks to his friends about making money, new ideas, investing, and other cool shit.
-        </p>
+  <!-- FULL-WIDTH HERO OUTSIDE MAIN FOR BLEED -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        New episodes whenever something interesting happens.
+      </div>
+      <h1 class="hero-title">F#ckups</h1>
+      <p class="hero-tagline">
+        Subah Wadhwani talks to his friends about making money, new ideas, investing, and other cool shit.
+      </p>
 
-        <div class="hero-cta-row">
-          <a class="btn-primary" href="https://www.youtube.com/channel/UCn5pnlscuwf_DoHvK1Grc4w" target="_blank" rel="noopener">
-            ▶ Watch latest episode
-          </a>
-          <a class="btn-ghost" href="#episodes">
-            Browse all episodes
-          </a>
-        </div>
-
-        <div class="hero-meta">
-          <span><strong>Host</strong> · Subah Wadhwani</span>
-          <span class="hero-meta-dot"></span>
-          <span>Business, tech, money, internet rabbit holes.</span>
-        </div>
+      <div class="hero-cta-row">
+        <a class="btn-primary" href="https://www.youtube.com/channel/UCn5pnlscuwf_DoHvK1Grc4w" target="_blank" rel="noopener">
+          ▶ Watch latest episode
+        </a>
+        <a class="btn-ghost" href="#episodes">
+          Browse all episodes
+        </a>
       </div>
 
-      <aside class="hero-right-card">
-        <img src="hero.png" alt="Cloud landscape" />
-        <div class="hero-right-glass">
-          <div>
-            <div class="hero-right-glass-title">When things break, stories start.</div>
-            <div style="font-size: 11px; opacity: 0.9;">
-              Failing upwards with founders, operators, and internet weirdos.
-            </div>
-          </div>
-          <div class="pill-small">F#ckups · Video podcast</div>
-        </div>
-      </aside>
-    </section>
+      <div class="hero-meta">
+        <span><strong>Host</strong> · Subah Wadhwani</span>
+        <span class="hero-meta-dot"></span>
+        <span>Business, tech, money, internet rabbit holes.</span>
+      </div>
+    </div>
+  </section>
 
+  <main>
     <!-- ABOUT -->
     <section id="about">
       <div class="section-header">
@@ -621,7 +585,7 @@
       </div>
     </section>
 
-    <!-- GUEST RECS + SOCIALS -->
+    <!-- GUEST RECS -->
     <section id="guests">
       <div class="section-header">
         <div class="section-title">Be on F#ckups</div>
@@ -639,6 +603,7 @@
       </div>
     </section>
 
+    <!-- SOCIALS -->
     <section id="socials">
       <div class="section-header">
         <div class="section-title">Elsewhere on the internet</div>
@@ -681,8 +646,6 @@
     // ==========
     // YOUTUBE EPISODES FETCH
     // ==========
-    // IMPORTANT: replace with your YouTube Data API v3 key.
-    // Create one at https://console.cloud.google.com/apis/library/youtube.googleapis.com
     const YT_API_KEY = "YOUR_YOUTUBE_API_KEY_HERE";
     const CHANNEL_ID = "UCn5pnlscuwf_DoHvK1Grc4w";
     const MAX_RESULTS = 8;
@@ -700,8 +663,6 @@
       }
 
       try {
-        // For any YouTube channel, the uploads playlist ID is:
-        // 'UU' + channelId.substring(2)
         const uploadsPlaylistId = "UU" + CHANNEL_ID.substring(2);
 
         const apiUrl =
@@ -788,4 +749,3 @@
   </script>
 </body>
 </html>
-
