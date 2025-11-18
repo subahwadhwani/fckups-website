@@ -580,12 +580,35 @@
 .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.22);
 }
+    .hero-full {
+  width: 100vw;
+  margin: 0 calc(50% - 50vw);
+  border-radius: 0 0 40px 40px;
+  min-height: 92vh;
+  background:
+    linear-gradient(
+      to right,
+      rgba(3, 7, 18, 0.88) 0%,
+      rgba(3, 7, 18, 0.5) 35%,
+      rgba(3, 7, 18, 0.15) 60%,
+      rgba(3, 7, 18, 0.05) 100%
+    ),
+    url("hero.png") center/cover no-repeat;
+  color: #e5ecff;
+}
+
+.hero-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-top: 160px;
+  padding-bottom: 120px;
+}
+
 
   </style>
 </head>
 <body>
-  <main>
-   <!-- NAV OVER HERO -->
+  <!-- NAV OVER HERO -->
   <header class="nav nav-over-hero">
     <div class="nav-left">
       <div class="logo">
@@ -608,7 +631,6 @@
   <!-- FULL TOP HERO -->
   <section class="hero hero-full">
     <div class="hero-inner">
-
       <div class="hero-pill">
         <span class="hero-pill-dot"></span>
         New episodes whenever something interesting happens.
@@ -633,9 +655,11 @@
         <span class="hero-meta-dot"></span>
         <span>Business, tech, money, internet rabbit holes.</span>
       </div>
-
     </div>
   </section>
+
+  <!-- REST OF PAGE -->
+  
   <main>
     <!-- ABOUT -->
     <section id="about">
