@@ -1,1 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>F#ckups · A podcast by Subah Wadhwani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="F#ckups — Subah Wadhwani talks to his friends about making money, new ideas, investing, and other cool shit." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="F#ckups · A podcast by Subah Wadhwani" />
+  <meta property="og:description" content="Subah Wadhwani talks to his friends about making money, new ideas, investing, and other cool shit." />
+  <meta property="og:image" content="https://YOUR_DOMAIN_HERE/logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://YOUR_DOMAIN_HERE/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f6fb;
+      --bg-alt: #ffffff;
+      --text-main: #0b1020;
+      --text-soft: #5b6275;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.15);
+      --border-subtle: rgba(15, 23, 42, 0.08);
+      --pill-bg: rgba(15, 23, 42, 0.04);
+      --shadow-soft: 0 20px 45px rgba(15, 23, 42, 0.12);
+      --radius-xl: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+      background: radial-gradient(circle at top, #e0f2fe 0, var(--bg) 40%, #e5e7eb 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 16px 72px;
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+      background: #000;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .wordmark {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-soft);
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid transparent;
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(148, 163, 184, 0.6);
+      text-decoration: none;
+    }
+
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--text-main);
+      color: white !important;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.4);
+    }
+
+    .nav-cta span {
+      font-size: 15px;
+      transform: translateY(1px);
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 32px;
+      align-items: center;
+      margin: 16px 0 48px;
+      padding: 28px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(130deg, rgba(255,255,255,0.85), rgba(255,255,255,0.98)),
+        url("cloud-hero.jpg") center/cover no-repeat;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-left {
+      padding-right: 8px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--pill-bg);
+      color: var(--text-soft);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hero-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 5vw, 48px);
+      line-height: 1.04;
+      margin: 0 0 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-tagline {
+      font-size: 15px;
+      color: var(--text-soft);
+      max-width: 440px;
+      margin-bottom: 18px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.03);
+      text-decoration: none;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.95);
+      text-decoration: none;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.7);
+    }
+
+    /* Hero right image card */
+    .hero-right-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      background: radial-gradient(circle at top, #93c5fd 0, #1d2534 50%, #020617 100%);
+      min-height: 260px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: stretch;
+      border: 1px solid rgba(15, 23, 42, 0.35);
+      box-shadow: 0 25px 50px rgba(15, 23, 42, 0.7);
+    }
+
+    .hero-right-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.96;
+      transform: scale(1.02);
+    }
+
+    .hero-right-glass {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.7);
+      color: white;
+      backdrop-filter: blur(14px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .hero-right-glass-title {
+      font-weight: 500;
+      margin-bottom: 2px;
+      font-size: 13px;
+    }
+
+    .pill-small {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.2);
+      font-size: 11px;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 20px;
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    .about-text {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 640px;
+    }
+
+    /* Episodes grid */
+    .episodes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .episode-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+      transform: translateY(0);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .episode-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.18);
+    }
+
+    .episode-thumb {
+      position: relative;
+      padding-top: 56.25%;
+      overflow: hidden;
+    }
+
+    .episode-thumb img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .episode-body {
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-height: 72px;
+    }
+
+    .episode-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .episode-meta {
+      font-size: 11px;
+      color: var(--text-soft);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .episodes-empty {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    /* Socials */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 12px;
+      color: var(--text-main);
+    }
+
+    .pill-link:hover {
+      background: white;
+      text-decoration: none;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      background: #020617;
+      color: rgba(241, 245, 249, 0.92);
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(15, 23, 42, 0.8);
+      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.9);
+    }
+
+    .footer-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.7;
+      background: url("cloud-footer.jpg") center/cover no-repeat;
+      filter: saturate(1.1);
+    }
+
+    .footer-overlay {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-left p {
+      margin: 2px 0;
+      font-size: 12px;
+    }
+
+    .footer-small {
+      font-size: 11px;
+      opacity: 0.88;
+    }
+
+    .footer-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-pill {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.7);
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 22px 18px;
+      }
+      .hero-right-card {
+        order: -1;
+        min-height: 230px;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding-inline: 14px;
+      }
+      .hero {
+        margin-top: 10px;
+      }
+      footer {
+        padding: 16px 14px 18px;
+      }
+      .footer-overlay {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <!-- NAV -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="logo">
+          <!-- 40x40 logo -->
+          <img src="logo.png" alt="F#ckups logo" />
+        </div>
+        <div>
+          <div class="wordmark">F#CKUPS</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#episodes">Episodes</a>
+        <a href="#about">About</a>
+        <a href="#guests">Guests</a>
+        <a href="#socials">Subah</a>
+        <a class="nav-cta" href="https://www.youtube.com/channel/UCn5pnlscuwf_DoHvK1Grc4w" target="_blank" rel="noopener">
+          Watch on YouTube <span>▶</span>
+        </a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          New episodes whenever something interesting happens.
+        </div>
+        <h1 class="hero-title">F#ckups</h1>
+        <p class="hero-tagline">
+          Subah Wadhwani talks to his friends about making money, new ideas, investing, and other cool shit.
+        </p>
+
+        <div class="hero-cta-row">
+          <a class="btn-primary" href="https://www.youtube.com/channel/UCn5pnlscuwf_DoHvK1Grc4w" target="_blank" rel="noopener">
+            ▶ Watch latest episode
+          </a>
+          <a class="btn-ghost" href="#episodes">
+            Browse all episodes
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span><strong>Host</strong> · Subah Wadhwani</span>
+          <span class="hero-meta-dot"></span>
+          <span>Business, tech, money, internet rabbit holes.</span>
+        </div>
+      </div>
+
+      <aside class="hero-right-card">
+        <img src="cloud-hero.jpg" alt="Cloud landscape" />
+        <div class="hero-right-glass">
+          <div>
+            <div class="hero-right-glass-title">When things break, stories start.</div>
+            <div style="font-size: 11px; opacity: 0.9;">
+              Failing upwards with founders, operators, and internet weirdos.
+            </div>
+          </div>
+          <div class="pill-small">F#ckups · Video podcast</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-header">
+        <div class="section-title">About the show</div>
+      </div>
+      <div class="card">
+        <p class="about-text">
+          F#ckups is where the glossy founder story gets stripped down.
+          Subah sits with friends and builders to talk about the money they’ve made, the ideas that didn’t work,
+          the bets they’re making next, and everything they’re not supposed to say on corporate podcasts.
+        </p>
+      </div>
+    </section>
+
+    <!-- EPISODES -->
+    <section id="episodes">
+      <div class="section-header">
+        <div class="section-title">Latest episodes</div>
+        <div class="section-subtitle">Pulled automatically from YouTube when you drop new videos.</div>
+      </div>
+      <div class="episodes-grid" id="episodes-grid">
+        <div class="episodes-empty" id="episodes-empty">
+          Loading episodes from YouTube… if nothing shows up, check your API key in the script.
+        </div>
+      </div>
+    </section>
+
+    <!-- GUEST RECS + SOCIALS -->
+    <section id="guests">
+      <div class="section-header">
+        <div class="section-title">Be on F#ckups</div>
+      </div>
+      <div class="card">
+        <p class="about-text">
+          Know someone who has a weird, interesting, or chaotic story about making money?
+          Recommend a guest (or yourself) below.
+        </p>
+        <div class="pill-row">
+          <a class="pill-link" href="https://forms.gle/yQNAomLR7D5MbykV9" target="_blank" rel="noopener">
+            ✉ Guest recommendation form
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="socials">
+      <div class="section-header">
+        <div class="section-title">Elsewhere on the internet</div>
+      </div>
+      <div class="card">
+        <p class="about-text">
+          Clips, behind-the-scenes, and other experiments live on Subah’s channels.
+        </p>
+        <div class="pill-row">
+          <a class="pill-link" href="https://www.youtube.com/channel/UCn5pnlscuwf_DoHvK1Grc4w" target="_blank" rel="noopener">
+            ▶ F#ckups on YouTube
+          </a>
+          <a class="pill-link" href="https://youtube.com/@subahwadhwani" target="_blank" rel="noopener">
+            📺 Subah’s YouTube
+          </a>
+          <a class="pill-link" href="https://instagram.com/subahwadhwani" target="_blank" rel="noopener">
+            📸 Subah’s Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-bg"></div>
+      <div class="footer-overlay">
+        <div class="footer-left">
+          <p>F#ckups · A podcast by Subah Wadhwani</p>
+          <p class="footer-small">Recorded somewhere between Bangalore and the internet.</p>
+        </div>
+        <div class="footer-right">
+          <span class="footer-pill">Watch on YouTube</span>
+          <span class="footer-pill">Share an episode with a friend</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // ==========
+    // YOUTUBE EPISODES FETCH
+    // ==========
+    // IMPORTANT: replace with your YouTube Data API v3 key.
+    // Create one at https://console.cloud.google.com/apis/library/youtube.googleapis.com
+    const YT_API_KEY = "YOUR_YOUTUBE_API_KEY_HERE";
+    const CHANNEL_ID = "UCn5pnlscuwf_DoHvK1Grc4w";
+    const MAX_RESULTS = 8;
+
+    async function fetchLatestEpisodes() {
+      const grid = document.getElementById("episodes-grid");
+      const emptyMsg = document.getElementById("episodes-empty");
+
+      if (!YT_API_KEY || YT_API_KEY === "YOUR_YOUTUBE_API_KEY_HERE") {
+        if (emptyMsg) {
+          emptyMsg.textContent =
+            "Episodes will appear here once you add your YouTube API key inside index.html.";
+        }
+        return;
+      }
+
+      try {
+        // For any YouTube channel, the uploads playlist ID is:
+        // 'UU' + channelId.substring(2)
+        const uploadsPlaylistId = "UU" + CHANNEL_ID.substring(2);
+
+        const apiUrl =
+          "https://www.googleapis.com/youtube/v3/playlistItems" +
+          "?part=snippet,contentDetails" +
+          "&maxResults=" + MAX_RESULTS +
+          "&playlistId=" + uploadsPlaylistId +
+          "&key=" + encodeURIComponent(YT_API_KEY);
+
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error("YouTube API error");
+        const data = await res.json();
+
+        if (!data.items || !data.items.length) {
+          if (emptyMsg) {
+            emptyMsg.textContent = "No episodes found yet. Drop a video on YouTube and they’ll show up here.";
+          }
+          return;
+        }
+
+        if (emptyMsg) emptyMsg.remove();
+
+        data.items.forEach((item) => {
+          const vidId = item.contentDetails && item.contentDetails.videoId;
+          const snippet = item.snippet || {};
+          const title = snippet.title || "Untitled episode";
+          const publishedAt = snippet.publishedAt || "";
+          const thumb =
+            (snippet.thumbnails && (snippet.thumbnails.maxres || snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default)) ||
+            null;
+
+          const dateStr = publishedAt
+            ? new Date(publishedAt).toLocaleDateString(undefined, {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })
+            : "";
+
+          const card = document.createElement("a");
+          card.className = "episode-card";
+          card.href = "https://www.youtube.com/watch?v=" + vidId;
+          card.target = "_blank";
+          card.rel = "noopener";
+
+          const thumbDiv = document.createElement("div");
+          thumbDiv.className = "episode-thumb";
+          if (thumb && thumb.url) {
+            const img = document.createElement("img");
+            img.src = thumb.url;
+            img.alt = title;
+            thumbDiv.appendChild(img);
+          }
+
+          const body = document.createElement("div");
+          body.className = "episode-body";
+
+          const titleEl = document.createElement("div");
+          titleEl.className = "episode-title";
+          titleEl.textContent = title;
+
+          const metaEl = document.createElement("div");
+          metaEl.className = "episode-meta";
+          metaEl.innerHTML = `<span>${dateStr}</span><span>Watch on YouTube →</span>`;
+
+          body.appendChild(titleEl);
+          body.appendChild(metaEl);
+
+          card.appendChild(thumbDiv);
+          card.appendChild(body);
+
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error(err);
+        if (emptyMsg) {
+          emptyMsg.textContent =
+            "Couldn’t load episodes from YouTube. Double-check your API key and channel ID.";
+        }
+      }
+    }
+
+    fetchLatestEpisodes();
+  </script>
+</body>
+</html>
 
