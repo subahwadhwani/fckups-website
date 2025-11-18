@@ -502,6 +502,85 @@
         align-items: flex-start;
       }
     }
+    /* === HERO + NAV OVERRIDES === */
+
+/* nav floats over the hero image */
+.nav-over-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 24px;
+  z-index: 20;
+  background: transparent;
+}
+
+/* glassy dark nav pills over the image */
+.nav-links {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(14px);
+}
+
+.nav-links a {
+  color: #f1f5f9;
+}
+
+/* Hero from very top, full width */
+.hero-full {
+  margin: 0;
+  width: 100%;
+  border-radius: 0 0 40px 40px;
+  min-height: 92vh;
+  background:
+    linear-gradient(
+      to right,
+      rgba(3, 7, 18, 0.88) 0%,
+      rgba(3, 7, 18, 0.5) 35%,
+      rgba(3, 7, 18, 0.15) 60%,
+      rgba(3, 7, 18, 0.05) 100%
+    ),
+    url("hero.png") center/cover no-repeat;
+}
+
+/* more breathing room inside hero */
+.hero-inner {
+  padding-top: 160px;
+  padding-bottom: 120px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* title + text spacing tweaks */
+.hero-title {
+  margin-top: 14px;
+  margin-bottom: 18px;
+}
+
+.hero-tagline {
+  margin-bottom: 26px;
+  max-width: 540px;
+  font-size: 17px;
+}
+
+/* CTA row spacing */
+.hero-cta-row {
+  margin-top: 12px;
+  margin-bottom: 32px;
+  gap: 16px;
+}
+
+/* ghost button more visible on dark background */
+.btn-ghost {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
   </style>
 </head>
 <body>
