@@ -67,17 +67,22 @@
     main {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 20px 16px 72px;
+      padding: 24px 16px 72px;
     }
 
-    /* NAV */
-    .nav {
+    /* NAV (floating over hero) */
+    .nav-over-hero {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1120px;
+      padding: 0 16px;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 10;
     }
 
     .nav-left {
@@ -108,30 +113,30 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-size: 12px;
-      color: var(--text-soft);
+      color: #e5e7eb;
     }
 
     .nav-links {
       display: flex;
       gap: 16px;
       align-items: center;
-      background: rgba(248, 250, 252, 0.8);
+      background: rgba(0, 0, 0, 0.25);
       padding: 6px 10px;
       border-radius: 999px;
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
     }
 
     .nav-links a {
       font-size: 13px;
-      color: var(--text-soft);
+      color: #f1f5f9;
       padding: 4px 9px;
       border-radius: 999px;
       border: 1px solid transparent;
     }
 
     .nav-links a:hover {
-      border-color: rgba(148, 163, 184, 0.6);
+      border-color: rgba(248, 250, 252, 0.6);
       text-decoration: none;
     }
 
@@ -152,17 +157,23 @@
       transform: translateY(1px);
     }
 
-    /* FULL-BLEED HERO */
-    .hero {
+    /* FULL-BLEED HERO FROM TOP */
+    .hero-full {
       position: relative;
       width: 100vw;
-      margin: 16px calc(50% - 50vw) 56px;
-      min-height: 70vh;
+      margin: 0 calc(50% - 50vw);
+      min-height: 92vh;
+      border-radius: 0 0 40px 40px;
       overflow: hidden;
-      border-radius: 32px;
       box-shadow: 0 28px 70px rgba(15, 23, 42, 0.65);
       background:
-        linear-gradient(to right, rgba(3, 7, 18, 0.9) 0, rgba(3, 7, 18, 0.65) 32%, rgba(15, 23, 42, 0.35) 60%, rgba(15, 23, 42, 0.1) 100%),
+        linear-gradient(
+          to right,
+          rgba(3, 7, 18, 0.9) 0%,
+          rgba(3, 7, 18, 0.6) 35%,
+          rgba(15, 23, 42, 0.25) 60%,
+          rgba(15, 23, 42, 0.08) 100%
+        ),
         url("hero.png") center/cover no-repeat;
       color: #e5ecff;
     }
@@ -170,7 +181,7 @@
     .hero-inner {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 38px 20px 54px;
+      padding: 160px 16px 120px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -186,7 +197,7 @@
       background: rgba(15, 23, 42, 0.7);
       color: #cbd5f5;
       font-size: 12px;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       border: 1px solid rgba(148, 163, 184, 0.6);
       backdrop-filter: blur(12px);
     }
@@ -203,23 +214,23 @@
       font-family: var(--serif);
       font-size: clamp(42px, 6vw, 60px);
       line-height: 1.02;
-      margin: 0 0 10px;
+      margin: 0 0 18px;
       letter-spacing: 0.03em;
       color: #f9fafb;
     }
 
     .hero-tagline {
-      font-size: 15px;
+      font-size: 17px;
       color: #e5e7eb;
-      max-width: 520px;
-      margin-bottom: 20px;
+      max-width: 540px;
+      margin-bottom: 26px;
     }
 
     .hero-cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
+      gap: 16px;
+      margin-bottom: 32px;
     }
 
     .btn-primary {
@@ -247,16 +258,16 @@
       gap: 8px;
       padding: 10px 18px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.9);
-      background: rgba(15, 23, 42, 0.4);
-      color: #e5ecff;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
       font-size: 13px;
       cursor: pointer;
       backdrop-filter: blur(14px);
     }
 
     .btn-ghost:hover {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(255, 255, 255, 0.22);
       text-decoration: none;
     }
 
@@ -467,13 +478,7 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      .hero {
-        min-height: 68vh;
-      }
-      .hero-inner {
-        padding: 30px 18px 46px;
-      }
-      .nav {
+      .nav-over-hero {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
@@ -481,14 +486,17 @@
       .nav-links {
         padding-inline: 8px;
       }
+      .hero-inner {
+        padding-top: 140px;
+        padding-bottom: 80px;
+      }
     }
 
     @media (max-width: 640px) {
       main {
         padding-inline: 14px;
       }
-      .hero {
-        margin-top: 12px;
+      .hero-full {
         border-radius: 0 0 32px 32px;
       }
       .hero-inner {
@@ -502,114 +510,11 @@
         align-items: flex-start;
       }
     }
-    /* === HERO + NAV OVERRIDES === */
-
-/* nav floats over the hero image */
-.nav-over-hero {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding-top: 24px;
-  z-index: 20;
-  background: transparent;
-}
-
-/* glassy dark nav pills over the image */
-.nav-links {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(14px);
-}
-
-.nav-links a {
-  color: #f1f5f9;
-}
-
-/* Hero from very top, full width */
-.hero-full {
-  margin: 0;
-  width: 100%;
-  border-radius: 0 0 40px 40px;
-  min-height: 92vh;
-  background:
-    linear-gradient(
-      to right,
-      rgba(3, 7, 18, 0.88) 0%,
-      rgba(3, 7, 18, 0.5) 35%,
-      rgba(3, 7, 18, 0.15) 60%,
-      rgba(3, 7, 18, 0.05) 100%
-    ),
-    url("hero.png") center/cover no-repeat;
-}
-
-/* more breathing room inside hero */
-.hero-inner {
-  padding-top: 160px;
-  padding-bottom: 120px;
-  max-width: 1120px;
-  margin: 0 auto;
-}
-
-/* title + text spacing tweaks */
-.hero-title {
-  margin-top: 14px;
-  margin-bottom: 18px;
-}
-
-.hero-tagline {
-  margin-bottom: 26px;
-  max-width: 540px;
-  font-size: 17px;
-}
-
-/* CTA row spacing */
-.hero-cta-row {
-  margin-top: 12px;
-  margin-bottom: 32px;
-  gap: 16px;
-}
-
-/* ghost button more visible on dark background */
-.btn-ghost {
-  border-color: rgba(255, 255, 255, 0.45);
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-}
-
-.btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.22);
-}
-    .hero-full {
-  width: 100vw;
-  margin: 0 calc(50% - 50vw);
-  border-radius: 0 0 40px 40px;
-  min-height: 92vh;
-  background:
-    linear-gradient(
-      to right,
-      rgba(3, 7, 18, 0.88) 0%,
-      rgba(3, 7, 18, 0.5) 35%,
-      rgba(3, 7, 18, 0.15) 60%,
-      rgba(3, 7, 18, 0.05) 100%
-    ),
-    url("hero.png") center/cover no-repeat;
-  color: #e5ecff;
-}
-
-.hero-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding-top: 160px;
-  padding-bottom: 120px;
-}
-
-
   </style>
 </head>
 <body>
   <!-- NAV OVER HERO -->
-  <header class="nav nav-over-hero">
+  <header class="nav-over-hero">
     <div class="nav-left">
       <div class="logo">
         <img src="logo.png" alt="F#ckups logo" />
@@ -629,7 +534,7 @@
   </header>
 
   <!-- FULL TOP HERO -->
-  <section class="hero hero-full">
+  <section class="hero-full">
     <div class="hero-inner">
       <div class="hero-pill">
         <span class="hero-pill-dot"></span>
@@ -659,7 +564,6 @@
   </section>
 
   <!-- REST OF PAGE -->
-  
   <main>
     <!-- ABOUT -->
     <section id="about">
